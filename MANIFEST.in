@@ -1,0 +1,4 @@
+include bento/schema.sql
+graft bento/static
+graft bentio/templates
+global-exclude *.pyc

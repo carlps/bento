@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Boxes{% endblock %}</h1>
+    {% if g.user %}
+        <a class="action" href="{{ url_for('box.create') }}">New</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for box in boxes %}
+        <article class="box">
+            <header>
+                <div>
+                    <h1>{{ box.name }}</h1>
+                    <div class="about">received on {{ box['received'].strftime('%Y-%m-%d') }}</div>
+                </div>
+                {% if g.user['id'] == box['user_id'] %}
+                    <a class="action" href="{{ url_for('box.update', box_id=box['id']) }}">Edit</a>
+                {% endif %}
+            </header>
+            <p class="body">TODO: pic and product details and such</p>
+        </article>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
